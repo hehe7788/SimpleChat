@@ -22,7 +22,7 @@ public class AudioRecorderButton extends Button implements AudioManager.AudioSta
     private static final String TAG = "AudioRecorderButton.Log";
     private static final int MSG_AUDIO_PREPARED = 0x110;
     private static final int MSG_VOLUME_CHANGED = 0x111;
-    private static final int MSG_DIALOG_DIMISS = 0x112;
+    private static final int MSG_DIALOG_DISMISS = 0x112;
 
 
     private int mCurState = STATE_NORMAL;
@@ -102,7 +102,7 @@ public class AudioRecorderButton extends Button implements AudioManager.AudioSta
                 case MSG_VOLUME_CHANGED:
                     mDialogManager.updateVolume(mAudioManager.getVolumeLevel(7));
                     break;
-                case MSG_DIALOG_DIMISS:
+                case MSG_DIALOG_DISMISS:
                     mDialogManager.dismissDialog();
                     break;
                 default:
@@ -146,11 +146,9 @@ public class AudioRecorderButton extends Button implements AudioManager.AudioSta
                     Log.e(TAG, "!isRecording || mTime < 0.6f");
                     mDialogManager.tooShort();
                     mAudioManager.cancel();
-                    // TODO 此时应该显示对话框，里面是感叹号图片，在3.3秒后消失， 然而什么都没有
-                    mHandler.sendEmptyMessageDelayed(MSG_DIALOG_DIMISS, 3300);
+                    mHandler.sendEmptyMessageDelayed(MSG_DIALOG_DISMISS, 1300);
                 } else if (mCurState == STATE_RECORDING) {
                     Log.e(TAG, "mCurState == STATE_RECORDING");
-                    //TODO 正常录制结束 releae callbacktoactivity
                     mDialogManager.dismissDialog();
                     mAudioManager.release();
 

@@ -58,7 +58,7 @@ public class ChatAudioAdapter extends ArrayAdapter<ChatAudio> {
             holder = (ViewHolder) convertView.getTag();
         }
         //what?
-        holder.time.setText(Math.round(getItemId(position)) + "\"");
+        holder.time.setText(Math.round(getItem(position).getTime()) + "\"");
         ViewGroup.LayoutParams lp = holder.bubble.getLayoutParams();
         lp.width = (int) (mMinItemWidth + (mMaxItemWidth / 60f * getItem(position).getTime()));
         return convertView;

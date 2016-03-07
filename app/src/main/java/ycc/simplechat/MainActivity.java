@@ -1,7 +1,10 @@
 package ycc.simplechat;
 
+import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,12 +16,16 @@ import java.util.List;
 import ycc.simplechat.view.AudioRecorderButton;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity.Log";
     //下面三个好基友在使用listView时一般都一起出现
     private ListView mListView;
     private ArrayAdapter<ChatAudio> mAdapter;
     private List<ChatAudio> mAudioData = new ArrayList<>();
 
     private AudioRecorderButton mAudioRecorderButton;
+    private View mAnimView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 mAudioData.add(chatAudio);
                 mAdapter.notifyDataSetChanged();
                 //定位到显示最后一个
-                mListView.setSelection(mAudioData.size()-1);
+                mListView.setSelection(mAudioData.size() - 1);
             }
         });
 
@@ -45,12 +52,47 @@ public class MainActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //todo 播放音频，动画
-                View animView = view.findViewById(R.id.item_anim);
-                animView.setBackgroundResource(R.drawable.bubble_anim);
+                //播放动画，若正有动画在播放，mAnimView不为空，先赋值为空，然后找到点击的item的mAnimView
+                if (mAnimView != null) {
+                    mAnimView.setBackgroundResource(R.drawable.adj);
+                    mAnimView = null;
+                }
+                mAnimView = view.findViewById(R.id.item_anim);
+                mAnimView.setBackgroundResource(R.drawable.bubble_anim);
+                AnimationDrawable anim = (AnimationDrawable) mAnimView.getBackground();
+                anim.start();
+                //播放音频
+                MediaManager.playAudio(mAudioData.get(position).getFilePath(), new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mAnimView.setBackgroundResource(R.drawable.adj);
+                    }
+                });
             }
         });
+    }
 
+    //重写生命周期方法
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MediaManager.pause();
+        Log.e(TAG, "onPause");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MediaManager.resume();
+        Log.e(TAG, "onResume");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MediaManager.release();
+        Log.e(TAG, "onDestroy");
 
     }
 
