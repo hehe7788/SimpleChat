@@ -32,7 +32,7 @@ public class AudioManager {
         void wellPrepared();
     }
 
-    public AudioStateListener mListener;
+    private AudioStateListener mListener;
 
     public void setOnAudioStateListener(AudioStateListener listener) {
         mListener = listener;
