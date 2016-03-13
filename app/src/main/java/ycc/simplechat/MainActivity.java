@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        //// TODO: 2016/3/13 长按删除
     }
 
     //重写生命周期方法
