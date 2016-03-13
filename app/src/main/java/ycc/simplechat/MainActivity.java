@@ -13,6 +13,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ycc.simplechat.adapter.ChatAudioAdapter;
+import ycc.simplechat.javabean.ChatAudio;
+import ycc.simplechat.javabean.MediaManager;
 import ycc.simplechat.view.AudioRecorderButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -94,32 +97,6 @@ public class MainActivity extends AppCompatActivity {
         MediaManager.release();
         Log.e(TAG, "onDestroy");
 
-    }
-
-    class ChatAudio {
-        private float mTime;
-        private String mFilePath;
-
-        public ChatAudio(float time, String filePath) {
-            mTime = time;
-            mFilePath = filePath;
-        }
-
-        public float getTime() {
-            return mTime;
-        }
-
-        public void setTime(float time) {
-            mTime = time;
-        }
-
-        public String getFilePath() {
-            return mFilePath;
-        }
-
-        public void setFilePath(String filePath) {
-            mFilePath = filePath;
-        }
     }
 
 }

@@ -1,4 +1,4 @@
-package ycc.simplechat.view;
+package ycc.simplechat.javabean;
 
 import android.media.MediaRecorder;
 

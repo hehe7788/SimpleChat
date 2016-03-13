@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 
 import ycc.simplechat.R;
+import ycc.simplechat.javabean.AudioManager;
+import ycc.simplechat.javabean.DialogManager;
 
 public class AudioRecorderButton extends Button implements AudioManager.AudioStateListener{
 

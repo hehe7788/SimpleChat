@@ -1,4 +1,4 @@
-package ycc.simplechat;
+package ycc.simplechat.javabean;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;

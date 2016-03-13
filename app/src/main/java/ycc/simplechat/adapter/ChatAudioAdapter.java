@@ -1,4 +1,4 @@
-package ycc.simplechat;
+package ycc.simplechat.adapter;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
@@ -9,7 +9,8 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import ycc.simplechat.MainActivity.ChatAudio;
+import ycc.simplechat.R;
+import ycc.simplechat.javabean.ChatAudio;
 import java.util.List;
 
 /**
