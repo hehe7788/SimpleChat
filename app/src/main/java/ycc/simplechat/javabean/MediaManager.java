@@ -2,6 +2,7 @@ package ycc.simplechat.javabean;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -10,6 +11,7 @@ import java.io.IOException;
  */
 public class MediaManager {
 
+    private static final String TAG = "MediaManager";
     private static MediaPlayer sMediaPlayer;
 
     private static boolean sIsPause;
@@ -37,7 +39,12 @@ public class MediaManager {
             e.printStackTrace();
         }
     }
-
+    public static void stopAudio() {
+        if (sMediaPlayer != null) {
+                sMediaPlayer.setOnCompletionListener(null);
+                sMediaPlayer.stop();
+        }
+    }
     public static void pause() {
         if (sMediaPlayer != null && sMediaPlayer.isPlaying()) {
             sMediaPlayer.pause();

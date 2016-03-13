@@ -114,6 +114,7 @@ public class AudioManager {
         mMediaRecorder.stop();
         mMediaRecorder.release();
         mMediaRecorder = null;
+
     }
 
     public int getVolumeLevel(int maxLevel) {
